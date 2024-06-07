@@ -1,0 +1,32 @@
+//.NET 8 Authentication with Identity in a Web API with Bearer Tokens & Cookies
+https://www.youtube.com/watch?v=8J3nuUegtL4
+
+
+//Package installations for authentication
+dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+dotnet add package Swashbuckle.AspNetCore.Filters
+
+//Migrations
+dotnet ef migrations add Initial or dotnet ef migrations add CountryModel
+dotnet ef database update
+
+//PROBLEM: The connection for this site is not secure
+//Add this to appsettings.json, just above "AllowedHosts": "*"
+"Kestrel": {
+    "Endpoints": {
+      "Http": {
+        "Url": "http://localhost:5000",
+        "Protocols": "Http1",
+        "Cors": {
+          "Enabled": false
+        }
+      }
+    }
+  },
+
+\\WARNING: Failed to determine the https port for redirect.
+\\Add this to appsettings.json, but it's better to ignore it in development environment
+"https_port": 443,
