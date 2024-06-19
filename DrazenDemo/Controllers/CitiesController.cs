@@ -29,8 +29,8 @@ public class CityController(CitiesService service) : ControllerBase
     [HttpPost]
     public IActionResult Post(City newCity)
     {
-        if (service.CityExists(newCity.Name, newCity.CountryId))
-            return BadRequest("City already exists.");
+        if (service.CityExists(newCity.PostalCode, newCity.CountryId))
+            return BadRequest($"City with postal code {newCity.PostalCode} already exists.");
 
         var city = service.Create(newCity);
         return CreatedAtAction(nameof(Post), new { id = city!.Id }, city);
@@ -40,16 +40,16 @@ public class CityController(CitiesService service) : ControllerBase
     public IActionResult Put(int id, City city)
     {
         if (id != city.Id)
-            return BadRequest("The provided county ID does not match the ID in the request body.");
+            return BadRequest("The provided city ID does not match the ID in the request body.");
 
         if (service.GetById(id) == null)
             return NotFound("City not found.");
 
-        if (service.CityExists(city.Name, city.CountryId, id))
-            return BadRequest("City already exists.");
+        if (service.CityExists(city.PostalCode, city.CountryId, id))
+            return BadRequest($"City with postal code {city.PostalCode} already exists.");
 
-        service.Update(city);
-        return NoContent();
+        var updatedCity = service.Update(city);
+        return Ok(updatedCity);
     }
 
     [HttpDelete("{id}")]

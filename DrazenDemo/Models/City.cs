@@ -11,7 +11,7 @@ public class City
     private string? postalCode;
 
     [Key]
-    public int Id { get; set; }
+    public int? Id { get; set; }
 
     [Required(AllowEmptyStrings = false, ErrorMessage = "City name is required.")]
     [MaxLength(50, ErrorMessage = "City name must not be more than 50 characters long.")]
@@ -21,7 +21,7 @@ public class City
         set { name = value?.Trim(); }
     }
 
-    [Required(AllowEmptyStrings = false, ErrorMessage = "Postal is required.")]
+    [Required(AllowEmptyStrings = false, ErrorMessage = "Postal code is required.")]
     [MaxLength(15, ErrorMessage = "Postal code must not be more than 15 characters long.")]
     public string? PostalCode
     {

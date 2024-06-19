@@ -1,6 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using DrazenDemo.Models;
 using DrazenDemo.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace DrazenDemo.Services;
 
@@ -10,7 +10,7 @@ public class CountriesService(DataContext context)
 
     public IEnumerable<Country> GetAll()
     {
-        return context.Countries.AsNoTracking().ToList();
+        return [.. context.Countries.AsNoTracking()];
     }
 
     public Country? GetById(int id)
@@ -43,10 +43,12 @@ public class CountriesService(DataContext context)
         return newCountry;
     }
 
-    public void Update(Country updatedCountry)
+    public Country? Update(Country updatedCountry)
     {
         context.Countries.Update(updatedCountry);
         context.SaveChanges();
+        var country = context.Countries.AsNoTracking().SingleOrDefault(c => c.Id == updatedCountry.Id);
+        return country;
     }
 
     public void DeleteById(int id)

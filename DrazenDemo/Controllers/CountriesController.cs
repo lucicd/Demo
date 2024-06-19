@@ -30,10 +30,10 @@ public class CountryController(CountriesService service) : ControllerBase
     public IActionResult Post(Country newCountry)
     {
         if (service.CodeExists(newCountry.Code))
-            return BadRequest("Country code already exists.");
+            return BadRequest($"Country code {newCountry.Code} already exists.");
 
         if (service.NameExists(newCountry.Name))
-            return BadRequest("Country name already exists.");
+            return BadRequest($"Country name {newCountry.Name} already exists.");
 
         var country = service.Create(newCountry);
         return CreatedAtAction(nameof(Post), new { id = country!.Id }, country);
@@ -43,19 +43,19 @@ public class CountryController(CountriesService service) : ControllerBase
     public IActionResult Put(int id, Country country)
     {
         if (id != country.Id)
-            return BadRequest("The provided county ID does not match the ID in the request body.");
+            return BadRequest("The provided country ID does not match the ID in the request body.");
 
         if (service.GetById(id) == null)
             return NotFound("Country not found.");
 
         if (service.CodeExists(country.Code, id))
-            return BadRequest("Country code already exists.");
+            return BadRequest($"Country code {country.Code} already exists.");
 
         if (service.NameExists(country.Name, id))
-            return BadRequest("Country name already exists.");
+            return BadRequest($"Country name {country.Name} already exists.");
 
-        service.Update(country);
-        return NoContent();
+        var updatedCountry = service.Update(country);
+        return Ok(updatedCountry);
     }
 
     [HttpDelete("{id}")]
