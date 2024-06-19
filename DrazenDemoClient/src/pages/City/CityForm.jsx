@@ -18,27 +18,17 @@ const countries = [
   { countryId: 13, name: "India" },
 ];
 
-export default function CityForm({
-  visible,
-  hideDialog,
-  record,
-  onInputChange,
-  submitted,
-  saveRecord,
-}) {
+export default function CityForm({ crudHandler }) {
+  const record = crudHandler.record;
+
   return (
-    <FormDialog
-      visible={visible}
-      hideDialog={hideDialog}
-      saveRecord={saveRecord}
-      header="City Details"
-    >
+    <FormDialog crudHandler={crudHandler}>
       <TextField
         name="name"
         label="Name"
         value={record.name}
-        onChange={onInputChange}
-        submitted={submitted}
+        onChange={crudHandler.onInputChange}
+        submitted={crudHandler.submitted}
         maxLength={50}
         required
         autoFocus
@@ -48,8 +38,8 @@ export default function CityForm({
         name="postalCode"
         label="Postal Code"
         value={record.postalCode}
-        onChange={onInputChange}
-        submitted={submitted}
+        onChange={crudHandler.onInputChange}
+        submitted={crudHandler.submitted}
         maxLength={15}
         required
       />
@@ -58,8 +48,8 @@ export default function CityForm({
         name="countryId"
         label="Country"
         value={record.countryId}
-        onChange={onInputChange}
-        submitted={submitted}
+        onChange={crudHandler.onInputChange}
+        submitted={crudHandler.submitted}
         maxLength={50}
         required
         optionLabel="name"

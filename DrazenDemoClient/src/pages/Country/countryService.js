@@ -1,30 +1,100 @@
 import * as Yup from "yup";
-import createService from "../../helpers/serviceHelpers";
 
 const apiEndpoint = "/api/country";
 
-const validationSchema = Yup.object().shape({
-  code: Yup.string().trim().required(),
-  name: Yup.string().trim().required(),
-});
+function putConfig(body) {
+  return {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  };
+}
 
-const emptyItem = {
-  id: null,
-  code: "",
-  name: "",
+function postConfig(body) {
+  return {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  };
+}
+
+function deleteConfig() {
+  return {
+    method: "DELETE",
+  };
+}
+
+function checkValidity(country) {
+  const validationSchema = Yup.object().shape({
+    code: Yup.string().trim().required(),
+    name: Yup.string().trim().required(),
+  });
+
+  try {
+    validationSchema.validateSync(country, { abortEarly: false });
+    return true;
+  } catch (error) {
+    throw Error("Missing required fields. Please check the form.");
+  }
+}
+
+const countryService = {
+  getEmpty() {
+    return {
+      id: null,
+      code: "",
+      name: "",
+    };
+  },
+
+  async getAll() {
+    const response = await fetch(apiEndpoint);
+    if (!response.ok) throw Error("Error fetching countries.");
+    const data = await response.json();
+    return data;
+  },
+
+  async save(countryToSave) {
+    const country = { ...countryToSave };
+    if (!checkValidity(country)) return;
+
+    if (country.id) {
+      const response = await fetch(
+        `${apiEndpoint}/${country.id}`,
+        putConfig(country)
+      );
+      if (!response.ok) {
+        const text = await response.text();
+        throw Error(text);
+      }
+      const data = await response.json();
+      return data;
+    }
+
+    country.id = null;
+    const response = await fetch(apiEndpoint, postConfig(country));
+    if (!response.ok) {
+      const text = await response.text();
+      throw Error(text);
+    }
+    const data = await response.json();
+    return data;
+  },
+
+  async delete(country) {
+    const response = await fetch(
+      `${apiEndpoint}/${country.id}`,
+      deleteConfig()
+    );
+    if (!response.ok) {
+      const text = await response.text();
+      throw Error(text);
+    }
+  },
 };
 
-const getAllErrorMessage = "Error fetching countries.";
-const putErrorMessage = "Error saving edited country.";
-const postErrorMessage = "Error saving new country.";
-const deleteErrorMessage = "Error deleting country.";
-
-export const countryService = createService(
-  apiEndpoint,
-  emptyItem,
-  validationSchema,
-  getAllErrorMessage,
-  putErrorMessage,
-  postErrorMessage,
-  deleteErrorMessage
-);
+export default countryService;

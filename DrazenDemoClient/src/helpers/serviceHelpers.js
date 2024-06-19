@@ -46,6 +46,8 @@ function checkValidity(validationSchema, item) {
   }
 }
 
+export { putConfig, postConfig, deleteConfig, checkValidity };
+
 export default function createService(
   endpoint,
   emptyItem,
@@ -73,19 +75,34 @@ export default function createService(
 
       if (checkValidity(validationSchema, item)) {
         if (item.id) {
+          console.log("PUT ITEM:", item);
+          // CHECK THIS
+          item.country = null;
           const response = await fetch(
             `${endpoint}/${item.id}`,
             putConfig(item)
           );
-          if (!response.ok) throw Error(putErrorMessage);
-          const index = findIndexById(items, item.id);
-          items[index] = item;
-        } else {
-          const response = await fetch(endpoint, postConfig(item));
-          if (!response.ok) throw Error(postErrorMessage);
+          if (!response.ok) {
+            const text = await response.text();
+            throw Error(text || putErrorMessage);
+          }
           const data = await response.json();
-          item.id = data.id;
-          items.push(item);
+          console.log("PUT DATA:", data);
+          const index = findIndexById(items, item.id);
+          // items[index] = item;
+          items[index] = data;
+        } else {
+          item.id = null;
+          const response = await fetch(endpoint, postConfig(item));
+          if (!response.ok) {
+            const text = await response.text();
+            throw Error(text || postErrorMessage);
+          }
+          const data = await response.json();
+          console.log("POST DATA:", data);
+          // item.id = data.id;
+          // item = {...data};
+          items.push(data);
         }
         return items;
       }

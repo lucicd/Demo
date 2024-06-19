@@ -11,6 +11,8 @@ export default function DropdownField({
   optionLabel,
   optionValue,
   width,
+  placeholder,
+  filterBy,
   ...props
 }) {
   return (
@@ -21,11 +23,16 @@ export default function DropdownField({
       <div style={{ maxWidth: width || "100%" }}>
         <Dropdown
           id={name}
+          name={name}
           value={value}
+          onChange={(e) => onChange(e, name)}
           options={options}
-          onChange={(e) => onChange({ target: { value: e.value } }, name)}
           optionLabel={optionLabel}
           optionValue={optionValue}
+          placeholder={placeholder}
+          filter
+          showClear
+          filterBy={filterBy}
           {...props}
           className={classNames({
             "p-invalid": props.required && submitted && !value,
