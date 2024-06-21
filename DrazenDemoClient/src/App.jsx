@@ -6,6 +6,7 @@ import ErrorPage from "./pages/CommonPages/ErrorPage";
 
 import CountryPage from "./pages/Country/CountryPage";
 import CityPage from "./pages/City/CityPage";
+import MarketPage from "./pages/Market/MarketPage";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/cities",
         element: <CityPage />,
+      },
+      {
+        path: "/markets",
+        element: <MarketPage />,
       },
     ],
   },

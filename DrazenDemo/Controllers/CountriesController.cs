@@ -8,7 +8,7 @@ namespace DrazenDemo.Controllers;
 [ApiController]
 [Route("[controller]")]
 // [Authorize]
-public class CountryController(CountriesService service) : ControllerBase
+public class CountriesController(CountriesService service) : ControllerBase
 {
     private readonly CountriesService service = service;
 
@@ -63,6 +63,10 @@ public class CountryController(CountriesService service) : ControllerBase
     {
         if (service.GetById(id) == null)
             return NotFound("Country not found.");
+
+        if (service.CitiesExist(id))
+            return BadRequest("Country has cities and cannot be deleted.");
+
         service.DeleteById(id);
         return NoContent();
     }

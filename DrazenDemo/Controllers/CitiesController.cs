@@ -8,7 +8,7 @@ namespace DrazenDemo.Controllers;
 [ApiController]
 [Route("[controller]")]
 // [Authorize]
-public class CityController(CitiesService service) : ControllerBase
+public class CitiesController(CitiesService service) : ControllerBase
 {
     private readonly CitiesService service = service;
 

@@ -1,23 +1,23 @@
 import * as Yup from "yup";
 import * as http from "../../utils/serviceHelpers";
 
-const apiEndpoint = "/api/countries";
+const apiEndpoint = "/api/markets";
 
-function checkValidity(country) {
+function checkValidity(market) {
   const validationSchema = Yup.object().shape({
     code: Yup.string().trim().required(),
     name: Yup.string().trim().required(),
   });
 
   try {
-    validationSchema.validateSync(country, { abortEarly: false });
+    validationSchema.validateSync(market, { abortEarly: false });
     return true;
   } catch (error) {
     throw Error("Missing required fields. Please check the form.");
   }
 }
 
-const countryService = {
+const marketService = {
   getEmpty() {
     return {
       id: null,
@@ -28,19 +28,19 @@ const countryService = {
 
   async getAll() {
     const response = await fetch(apiEndpoint);
-    if (!response.ok) throw Error("Error fetching countries.");
+    if (!response.ok) throw Error("Error fetching markets.");
     const data = await response.json();
     return data;
   },
 
-  async save(countryToSave) {
-    const country = { ...countryToSave };
-    if (!checkValidity(country)) return;
+  async save(marketToSave) {
+    const market = { ...marketToSave };
+    if (!checkValidity(market)) return;
 
-    if (country.id) {
+    if (market.id) {
       const response = await fetch(
-        `${apiEndpoint}/${country.id}`,
-        http.putConfig(country)
+        `${apiEndpoint}/${market.id}`,
+        http.putConfig(market)
       );
       if (!response.ok) {
         const text = await response.text();
@@ -50,8 +50,8 @@ const countryService = {
       return data;
     }
 
-    country.id = null;
-    const response = await fetch(apiEndpoint, http.postConfig(country));
+    market.id = null;
+    const response = await fetch(apiEndpoint, http.postConfig(market));
     if (!response.ok) {
       const text = await response.text();
       throw Error(text);
@@ -60,9 +60,9 @@ const countryService = {
     return data;
   },
 
-  async delete(country) {
+  async delete(market) {
     const response = await fetch(
-      `${apiEndpoint}/${country.id}`,
+      `${apiEndpoint}/${market.id}`,
       http.deleteConfig()
     );
     if (!response.ok) {
@@ -72,4 +72,4 @@ const countryService = {
   },
 };
 
-export default countryService;
+export default marketService;

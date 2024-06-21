@@ -28,4 +28,7 @@ public class Country
         get { return name; }
         set { name = value?.Trim(); }
     }
+
+
+    public ICollection<City>? Cities { get; set; }
 }

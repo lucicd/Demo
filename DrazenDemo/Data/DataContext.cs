@@ -8,4 +8,16 @@ public class DataContext(DbContextOptions<DataContext> options) : IdentityDbCont
 {
     public DbSet<Country> Countries => Set<Country>();
     public DbSet<City> Cities => Set<City>();
+    public DbSet<Market> Markets => Set<Market>();
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder
+            .Entity<City>()
+            .HasOne(e => e.Country)
+            .WithMany(e => e.Cities)
+            .OnDelete(DeleteBehavior.Restrict);
+    }
 }

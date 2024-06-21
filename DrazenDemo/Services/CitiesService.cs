@@ -10,7 +10,23 @@ public class CitiesService(DataContext context)
 
     public IEnumerable<City> GetAll()
     {
-        return [.. context.Cities.AsNoTracking().Include(c => c.Country)];
+        // return [.. context.Cities.AsNoTracking().Include(c => c.Country).DefaultIfEmpty()];
+        var query = from city in context.Cities
+                    join country in context.Countries on city.CountryId equals country.Id into grouping
+                    from country in grouping.DefaultIfEmpty()
+                    select new City
+                    {
+                        Id = city.Id,
+                        Name = city.Name,
+                        PostalCode = city.PostalCode,
+                        CountryId = city.CountryId,
+                        Country = new Country
+                        {
+                            Id = country.Id,
+                            Name = country.Name
+                        }
+                    };
+        return [.. query];
     }
 
     public City? GetById(int id)

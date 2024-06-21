@@ -10,5 +10,6 @@ public class DbInitializer
 
         CountriesSeeder.Run(context);
         CitiesSeeder.Run(context);
+        MarketsSeeder.Run(context);
     }
 }

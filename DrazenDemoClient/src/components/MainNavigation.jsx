@@ -14,6 +14,10 @@ export default function MainNavigation() {
       label: "Cities",
       command: () => navigate("/cities"),
     },
+    {
+      label: "Markets",
+      command: () => navigate("/markets"),
+    },
   ];
   return <Menubar model={items} />;
 }

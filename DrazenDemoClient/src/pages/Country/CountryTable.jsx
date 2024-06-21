@@ -35,43 +35,50 @@ const countryColumns = [
 function CountryForm({ countryHandler }) {
   const formContent = (
     <Panel header={countryHandler.formHeaderTemplate}>
-      <TextField
-        name="code"
-        label="Code"
-        value={countryHandler.country?.code}
-        onChange={countryHandler.onInputChange}
-        submitted={countryHandler.submitted}
-        maxLength={2}
-        width="4rem"
-        required
-        autoFocus
-      />
-
-      <TextField
-        name="name"
-        label="Name"
-        value={countryHandler.country?.name}
-        onChange={countryHandler.onInputChange}
-        submitted={countryHandler.submitted}
-        maxLength={50}
-        required
-      />
-
-      <div className="flex gap-2 justify-content-center">
-        <Button
-          label="Save"
-          icon="pi pi-check"
-          onClick={countryHandler.saveCountry}
-          style={{ maxWidth: "8rem" }}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
+        <TextField
+          name="code"
+          label="Code"
+          value={countryHandler.country?.code}
+          onChange={countryHandler.onInputChange}
+          submitted={countryHandler.submitted}
+          maxLength={2}
+          width="4rem"
+          required
+          autoFocus
         />
-        <Button
-          label="Cancel"
-          icon="pi pi-times"
-          outlined
-          onClick={countryHandler.hideCountryDialog}
-          style={{ maxWidth: "8rem" }}
+
+        <TextField
+          name="name"
+          label="Name"
+          value={countryHandler.country?.name}
+          onChange={countryHandler.onInputChange}
+          submitted={countryHandler.submitted}
+          maxLength={50}
+          required
         />
-      </div>
+
+        <div className="flex gap-2 justify-content-center">
+          <Button
+            type="submit"
+            label="Save"
+            icon="pi pi-check"
+            onClick={countryHandler.saveCountry}
+            style={{ maxWidth: "8rem" }}
+          />
+          <Button
+            label="Cancel"
+            icon="pi pi-times"
+            outlined
+            onClick={countryHandler.hideCountryDialog}
+            style={{ maxWidth: "8rem" }}
+          />
+        </div>
+      </form>
     </Panel>
   );
 
@@ -280,7 +287,6 @@ function useCountryTable() {
 
   return {
     country,
-    setCountry,
     countries,
     deleteCountryDialog,
     formDialogVisible,
@@ -312,15 +318,11 @@ export default function CountryTable() {
           className="mb-4"
           start={countryHandler.leftToolbarTemplate}
           end={countryHandler.rightToolbarTemplate}
-        ></Toolbar>
+        />
 
         <DataTable
           ref={countryHandler.dt}
           value={countryHandler.countries}
-          selection={countryHandler.selectedCountries}
-          onSelectionChange={(e) =>
-            countryHandler.setSelectedCountries(e.value)
-          }
           dataKey="id"
           emptyMessage="No records found"
           paginator
@@ -340,7 +342,7 @@ export default function CountryTable() {
             body={countryHandler.actionBodyTemplate}
             exportable={false}
             style={{ minWidth: "12rem" }}
-          ></Column>
+          />
         </DataTable>
       </div>
 

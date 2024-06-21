@@ -1,32 +1,7 @@
 import * as Yup from "yup";
+import * as http from "../../utils/serviceHelpers";
 
-const apiEndpoint = "/api/city";
-
-function putConfig(body) {
-  return {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  };
-}
-
-function postConfig(body) {
-  return {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  };
-}
-
-function deleteConfig() {
-  return {
-    method: "DELETE",
-  };
-}
+const apiEndpoint = "/api/cities";
 
 function checkValidity(city) {
   const validationSchema = Yup.object().shape({
@@ -67,7 +42,7 @@ const cityService = {
     if (city.id) {
       const response = await fetch(
         `${apiEndpoint}/${city.id}`,
-        putConfig(city)
+        http.putConfig(city)
       );
       if (!response.ok) {
         const text = await response.text();
@@ -78,7 +53,7 @@ const cityService = {
     }
 
     city.id = null;
-    const response = await fetch(apiEndpoint, postConfig(city));
+    const response = await fetch(apiEndpoint, http.postConfig(city));
     if (!response.ok) {
       const text = await response.text();
       throw Error(text);
@@ -88,7 +63,10 @@ const cityService = {
   },
 
   async delete(city) {
-    const response = await fetch(`${apiEndpoint}/${city.id}`, deleteConfig());
+    const response = await fetch(
+      `${apiEndpoint}/${city.id}`,
+      http.deleteConfig()
+    );
     if (!response.ok) {
       const text = await response.text();
       throw Error(text);

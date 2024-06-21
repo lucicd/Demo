@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DrazenDemo.Models;
 
-[Index(nameof(Name), nameof(CountryId), IsUnique = true)]
+[Index(nameof(PostalCode), nameof(CountryId), IsUnique = true)]
 public class City
 {
     private string? name;

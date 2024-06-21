@@ -60,4 +60,9 @@ public class CountriesService(DataContext context)
             context.SaveChanges();
         }
     }
+
+    public bool CitiesExist(int id)
+    {
+        return context.Cities.AsNoTracking().Any(c => c.CountryId == id);
+    }
 }

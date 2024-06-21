@@ -36,6 +36,7 @@ builder.Services.AddIdentityApiEndpoints<IdentityUser>()
 
 builder.Services.AddScoped<CountriesService>();
 builder.Services.AddScoped<CitiesService>();
+builder.Services.AddScoped<MarketsService>();
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandlingMiddleware>();
 builder.Services.AddProblemDetails();
