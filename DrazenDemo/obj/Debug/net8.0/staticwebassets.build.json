@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "xHfqX+Qe+qXAvzotdDYjuRzF4uWSt+6dKQPr1Hv6DIM=",
+  "Hash": "vNFsgcvVN9YSmPinQ5Tesi5Q4OL1T+SjBofKYCsK9FQ=",
   "Source": "DrazenDemo",
   "BasePath": "_content/DrazenDemo",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

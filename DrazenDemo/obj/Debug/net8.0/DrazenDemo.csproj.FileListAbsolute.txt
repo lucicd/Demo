@@ -270,3 +270,7 @@ C:\Users\lucic\projects\react\Demo\DrazenDemo\obj\Debug\net8.0\refint\DrazenDemo
 C:\Users\lucic\projects\react\Demo\DrazenDemo\obj\Debug\net8.0\DrazenDemo.pdb
 C:\Users\lucic\projects\react\Demo\DrazenDemo\obj\Debug\net8.0\DrazenDemo.genruntimeconfig.cache
 C:\Users\lucic\projects\react\Demo\DrazenDemo\obj\Debug\net8.0\ref\DrazenDemo.dll
+C:\Users\lucic\projects\react\Demo\DrazenDemo\bin\Debug\net8.0\DrazenDemo.staticwebassets.endpoints.json
+C:\Users\lucic\projects\react\Demo\DrazenDemo\obj\Debug\net8.0\DrazenDemo.sourcelink.json
+C:\Users\lucic\projects\react\Demo\DrazenDemo\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\lucic\projects\react\Demo\DrazenDemo\obj\Debug\net8.0\staticwebassets\msbuild.DrazenDemo.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
