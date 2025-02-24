@@ -33,3 +33,6 @@ DrazenDemoServer/DrazenDemo/obj/*
 DrazenDemoServer/DrazenDemo/DrazenDemo.db-shm
 DrazenDemoServer/DrazenDemo/DrazenDemo.db-wal
 DrazenDemoServer/DrazenDemo/DrazenDemo.db
+
+DrazenDemoServer/DrazenDemoServer/bin/*
+DrazenDemoServer/DrazenDemoServer/obj/*
