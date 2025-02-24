@@ -27,7 +27,21 @@ dist-ssr
 *.dll
 *.db
 
+bin/*
+obj/*   
 DrazenDemo/bin/*
 DrazenDemo/obj/*
 DrazenDemo/DrazenDemo.db-shm
 DrazenDemo/DrazenDemo.db-wal
+DrazenDemo/bin/Debug/net8.0/DrazenDemo.dll
+DrazenDemo/bin/Debug/net8.0/DrazenDemo.dll
+DrazenDemo/bin/Debug/net8.0/DrazenDemo.exe
+DrazenDemo/bin/Debug/net8.0/DrazenDemo.pdb
+DrazenDemo/obj/Debug/net8.0/apphost.exe
+DrazenDemo/obj/Debug/net8.0/DrazenDemo.AssemblyInfo.cs
+DrazenDemo/obj/Debug/net8.0/DrazenDemo.AssemblyInfoInputs.cache
+DrazenDemo/obj/Debug/net8.0/DrazenDemo.dll
+DrazenDemo/obj/Debug/net8.0/DrazenDemo.pdb
+DrazenDemo/obj/Debug/net8.0/DrazenDemo.sourcelink.json
+DrazenDemo/obj/Debug/net8.0/ref/DrazenDemo.dll
+DrazenDemo/obj/Debug/net8.0/refint/DrazenDemo.dll
