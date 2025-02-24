@@ -27,7 +27,7 @@ dist-ssr
 *.dll
 *.db
 
-./DrazenDemo/bin/*
-./DrazenDemo/obj/*
-./DrazenDemo/DrazenDemo.db-shm
-./DrazenDemo/DrazenDemo.db-wal
+DrazenDemo/bin/*
+DrazenDemo/obj/*
+DrazenDemo/DrazenDemo.db-shm
+DrazenDemo/DrazenDemo.db-wal
