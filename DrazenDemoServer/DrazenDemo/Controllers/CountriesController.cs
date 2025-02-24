@@ -8,9 +8,9 @@ namespace DrazenDemo.Controllers;
 [ApiController]
 [Route("[controller]")]
 // [Authorize]
-public class CountriesController(CountriesService service) : ControllerBase
+public class CountriesController(ICountriesService service) : ControllerBase
 {
-    private readonly CountriesService service = service;
+    private readonly ICountriesService service = service;
 
     [HttpGet]
     public IEnumerable<Country> GetAll()

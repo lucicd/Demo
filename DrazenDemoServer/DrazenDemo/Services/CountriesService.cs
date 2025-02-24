@@ -4,7 +4,7 @@ using DrazenDemo.Data;
 
 namespace DrazenDemo.Services;
 
-public class CountriesService(DataContext context)
+public class CountriesService(DataContext context) : ICountriesService
 {
     private readonly DataContext context = context;
 
