@@ -34,7 +34,7 @@ builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddEntityFrameworkStores<DataContext>();
 
 
-builder.Services.AddScoped<CountriesService>();
+builder.Services.AddScoped<ICountriesService, CountriesService>();
 builder.Services.AddScoped<CitiesService>();
 builder.Services.AddScoped<MarketsService>();
 
