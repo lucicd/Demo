@@ -8,9 +8,9 @@ namespace DrazenDemo.Controllers;
 [ApiController]
 [Route("[controller]")]
 // [Authorize]
-public class MarketsController(MarketsService service) : ControllerBase
+public class MarketsController(IMarketsService service) : ControllerBase
 {
-    private readonly MarketsService service = service;
+    private readonly IMarketsService service = service;
 
     [HttpGet]
     public IEnumerable<Market> GetAll()

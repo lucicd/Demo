@@ -4,7 +4,7 @@ using DrazenDemo.Data;
 
 namespace DrazenDemo.Services;
 
-public class MarketsService(DataContext context)
+public class MarketsService(DataContext context) : IMarketsService
 {
     private readonly DataContext context = context;
 
