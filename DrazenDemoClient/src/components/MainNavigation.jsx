@@ -18,6 +18,14 @@ export default function MainNavigation() {
       label: "Markets",
       command: () => navigate("/markets"),
     },
+    {
+      label: "Login",
+      command: () => navigate("/auth"),
+    },
+    {
+      label: "Logout",
+      command: () => navigate("/logout"),
+    },
   ];
   return <Menubar model={items} />;
 }

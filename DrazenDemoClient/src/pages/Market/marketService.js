@@ -27,7 +27,7 @@ const marketService = {
   },
 
   async getAll() {
-    const response = await fetch(apiEndpoint);
+    const response = await fetch(apiEndpoint, http.getConfig());
     if (!response.ok) throw Error("Error fetching markets.");
     const data = await response.json();
     return data;

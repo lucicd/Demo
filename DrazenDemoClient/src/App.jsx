@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/CommonPages/HomePage";
 import RootLayout from "./components/RootLayout";
 import ErrorPage from "./pages/CommonPages/ErrorPage";
+import AuthenticationPage from "./pages/CommonPages/AuthenticationPage";
+import LogoutPage from "./pages/CommonPages/LogoutPage";
 
 import CountryPage from "./pages/Country/CountryPage";
 import CityPage from "./pages/City/CityPage";
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
       {
         path: "/markets",
         element: <MarketPage />,
+      },
+      {
+        path: "/auth",
+        element: <AuthenticationPage />,
+      },
+      {
+        path: "/logout",
+        element: <LogoutPage />,
       },
     ],
   },
